@@ -1,6 +1,6 @@
 {
   "name": "fetx-rest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The easiest and best way to create a REST API Client Library.",
   "main": "index.js",
   "scripts": {
