@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "endpoints",
+  "definitions": {
+    "credentials": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "user": {
+          "type": "string"
+        },
+        "storage": {
+          "anyOf":[
+            {
+              "type": "string",
+              "enum": [ "localStorage", "sessionStorage", "cookies", "custom" ]
+            },
+            {
+              "type": "object"
+            }
+          ]
+        }
+      }
+    },
+    "endpoint": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {,
+        "$$root": {
+          "type": "string"
+        },
+        "$rest": {
+          "type": "boolean"
+        },
+        "$auth": {
+          "$ref": "#/definitions/credentials"
+        }
+      }
+    },
+    "objectWithAnything": {
+      "type": "object",
+      "patternProperties": {
+        "^.*$": {
+          "anyOf": [
+            { "type": "string" },
+            { "type": "boolean" },
+            { "type": "number" },
+            { "type": "array" },
+            { "$ref": "#/definitions/objectWithAnything" }
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^.*$": {
+      "anyOf": [
+        { "$ref": "#/definitions/endpoint" },
+        { "type": "string" },
+        { "type": "boolean" },
+        { "type": "number" },
+        { "type": "array" },
+        { "$ref": "#/definitions/objectWithAnything" }
+      ]
+    }
+  },
+  "additionalProperties": false
+}
