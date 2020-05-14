@@ -1,5 +1,5 @@
 const deepmerge = require('deepmerge');
-const base64Encode = require(btoa);
+const base64Encode = require('../btoa');
 
 const DEFAULT_STORAGE_KEYS = {
   user: 'user',

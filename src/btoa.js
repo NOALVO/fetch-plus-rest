@@ -12,7 +12,7 @@ E.prototype = new Error;
 E.prototype.code = 5;
 E.prototype.name = 'InvalidCharacterError';
 
-function btoa(input) {
+function _btoa(input) {
   var str = String(input);
   var output = '';
   for (
@@ -34,4 +34,4 @@ function btoa(input) {
   return output;
 }
 
-module.exports = btoa;
+module.exports = _btoa;
