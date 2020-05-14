@@ -64,7 +64,7 @@ class FetchPlusRest {
       const plugin = this.plugins[i];
       const pluginOptions = this.pluginsOptions[plugin.NAME()] || {};
       const pluginInstance = new plugin(pluginOptions);
-      await pluginInstance.initialize(this);
+      if (pluginInstance.initialize) await pluginInstance.initialize(this);
       this.pluginsInstances.push(pluginInstance);
     }
   }

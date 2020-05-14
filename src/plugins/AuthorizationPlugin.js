@@ -71,10 +71,6 @@ class AuthorizationPlugin {
     this.storageKeys = deepmerge(storageKeys, DEFAULT_STORAGE_KEYS);
   }
 
-  async initialize(fprInstance = {}) {
-    // fpr is the FetchPlusRest instance
-  }
-
   get middlewares() {
     return [ _generateMiddleware(this) ];
   }
