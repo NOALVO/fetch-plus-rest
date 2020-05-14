@@ -1,5 +1,5 @@
 class HttpHeadersPlugin {
-  static NAME = 'headers';
+  static NAME() { return 'headers' };
 
   constructor() {
 

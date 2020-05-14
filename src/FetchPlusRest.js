@@ -62,7 +62,7 @@ class FetchPlusRest {
   async _initializePlugins() {
     for (let i = 0; i < this.plugins.length; i++) {
       const plugin = this.plugins[i];
-      const pluginOptions = this.pluginsOptions[plugin.NAME] || {};
+      const pluginOptions = this.pluginsOptions[plugin.NAME()] || {};
       const pluginInstance = new plugin(pluginOptions);
       await pluginInstance.initialize(this);
       this.pluginsInstances.push(pluginInstance);

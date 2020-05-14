@@ -1,7 +1,7 @@
 const Enx = require('@enx/env');
 
 class EnxPlugin {
-  static NAME = 'enx';
+  static NAME() { return 'enx' };
 
   constructor(options = {}) {
     this.options = options;
