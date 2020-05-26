@@ -79,7 +79,7 @@ class FetchPlusRest {
   }
 
   async _initializeApiClient() {
-    await this._generateApis(this.endpoints);
+    if (this.endpoints) await this._generateApis(this.endpoints);
   }
 
   _isUrl(key, value) {
@@ -161,21 +161,24 @@ class FetchPlusRest {
     return requestFunc;
   }
 
-  async buildCustomFetchWrapper(pluginsOptions) {
+  buildCustomFetchWrapper(pluginsOptions) {
     const fprInstance = this;
 
-    const client = createClient(url, {
-      fetch: fprInstance.fetch,
-    });
-
-    fprInstance.middlewares.forEach(middleware => {
-      client.addMiddleware((request) => {
-        return middleware(request, null, pluginsOptions, fprInstance);
+    return async (req, opts) => {
+      const client = createClient(req, {
+        fetch: fprInstance.fetch,
       });
-    });
+  
+      fprInstance.middlewares.forEach(middleware => {
+        client.addMiddleware((request) => {
+          return middleware(request, null, pluginsOptions, fprInstance);
+        });
+      });
 
-    return client.request;
+      return client.request(_, opts);
+    };
   }
 }
 
 module.exports = FetchPlusRest;
+  
